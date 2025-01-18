@@ -1,0 +1,34 @@
+name: bangla_pdf_fixer
+description: A package to fix broken font issues in PDFs for Bangla text.
+version: 1.0.0
+homepage: https://github.com/arrahmanbd/bangla_pdf_fixer
+
+environment:
+  sdk: ^3.5.4
+  flutter: '>=3.3.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  plugin_platform_interface: ^2.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+
+flutter:
+  # Update the pubspec.yaml file to include the font in the lib/fonts section.
+  assets:
+      - lib/fonts/AdorOrjoma/
+      - lib/fonts/CharuChandan/
+      - lib/fonts/CharuChandanBloodDrip/
+      - lib/fonts/Charukola/
+      - lib/fonts/Default/
+      - lib/fonts/DiproAD/
+      - lib/fonts/LipiPadmo/
+      - lib/fonts/Nondon/
+      - lib/fonts/Rajnigandha/
+      - lib/fonts/RuposhiBangla/
+      - lib/fonts/Tomalicca/

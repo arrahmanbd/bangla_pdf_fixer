@@ -1,0 +1,5 @@
+///Credits from Developer @AR Rahman
+///
+///I want to express my heartfelt gratitude to the talented creator of the font I used in this project. Although the source and creator are unknown, their work has greatly contributed to enhancing the design and overall experience of my application.
+///
+///If you recognize this font or its creator, please feel free to reach out so I can give proper credit.
