@@ -1,7 +1,11 @@
+
 # Bangla PDF Fixer 🔧
 
- **Bangla PDF Fixer** is a Flutter package designed to fix broken Bangla fonts while generating PDFs in Flutter using Bijoy ANSI encoding. It converts Bijoy-encoded Bangla text to Unicode, ensuring proper rendering and display of Bangla characters in PDFs. It's just a solution for broken Bangla font. Nothing more, nothing less.
+[![Stand With Palestine](images/StandWithPalestine.svg)](https://pub.dev/packages/bangla_pdf_fixer)
 
+ **Bangla PDF Fixer** is a Flutter package designed to fix broken Bangla fonts while generating PDFs in Flutter using ANSI encoding. It converts Bangla text to Unicode, ensuring proper rendering and display of Bangla characters in PDFs using custom fonts. It's just a solution for broken Bangla font. Nothing more, nothing less.
+
+![Bangla PDF Fixer](images/pdf_fixer.png)
 
 ## Features
 
@@ -77,13 +81,18 @@ Future<void> generateAndOpenInvoice() async {
 }
 ```
 
-## Change the Default Font
+## Change the Default Font 🔧
 
-The bangla_pdf_fixer package includes over 10 Bangla fonts, allowing you to easily customize the appearance of your PDF documents. To change the default font, use the GetFonts class to access the desired font and load it with the FontManager. Here's an example of how to load the Kalpurush font:
+The bangla_pdf_fixer package includes over 10 Bangla fonts, allowing you to easily customize the appearance of your PDF documents. To change the default font, use the GetFonts class to access the desired font and load it with the FontManager. Here's an example of how to change font:
 
 ```dart
 final fontData = await FontManager.loadFont(GetFonts.charukola);
 ```
+
+
+## Demo Preview 📥
+
+[Click here to check the output file](example/invoice.pdf)
 
 ## Contributing 🚀
 
@@ -95,7 +104,7 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ## Author
 
-Bangla PDF Fixer is maintained by AR Rahman. You can contact me at arrahman.bd@outlook.com.
+Bangla PDF Fixer is maintained by AR Rahman. You can contact me at [arrahman.bd@outlook.com](mailto:arrahman.bd@outlook.com).
 
 ## Special Thanks 🙏✨
 
