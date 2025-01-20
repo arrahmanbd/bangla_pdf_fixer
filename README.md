@@ -1,11 +1,11 @@
 
 # Bangla PDF Fixer 🔧
 
-[![Stand With Palestine](images/StandWithPalestine.svg)](https://pub.dev/packages/bangla_pdf_fixer)
+[![Stand With Palestine](https://github.com/arrahmanbd/bangla_pdf_fixer/raw/master/images/StandWithPalestine.svg)](https://pub.dev/packages/bangla_pdf_fixer)
 
  **Bangla PDF Fixer** is a Flutter package designed to fix broken Bangla fonts while generating PDFs in Flutter using ANSI encoding. It converts Bangla text to Unicode, ensuring proper rendering and display of Bangla characters in PDFs using custom fonts. It's just a solution for broken Bangla font. Nothing more, nothing less.
 
-![Bangla PDF Fixer](images/pdf_fixer.png)
+![Bangla PDF Fixer](https://github.com/arrahmanbd/bangla_pdf_fixer/raw/master/images/pdf_fixer.png)
 
 ## Features
 
@@ -20,7 +20,7 @@ Add this package to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  bangla_pdf_fixer: ^1.0.0
+  bangla_pdf_fixer: ^1.0.2
 ```
 
 Run flutter pub get to install the package.
