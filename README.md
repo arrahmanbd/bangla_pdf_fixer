@@ -3,13 +3,16 @@
 
 [![Stand With Palestine](https://github.com/arrahmanbd/bangla_pdf_fixer/raw/master/images/StandWithPalestine.svg)](https://pub.dev/packages/bangla_pdf_fixer)
 
- **Bangla PDF Fixer** is a Flutter package designed to fix broken Bangla fonts while generating PDFs in Flutter using ANSI encoding. It converts Bangla text to Unicode, ensuring proper rendering and display of Bangla characters in PDFs using custom fonts. It's just a solution for broken Bangla font. Nothing more, nothing less.
+**Bangla PDF Fixer** is a Flutter package built to fix broken Bangla fonts in PDFs. It ensures proper rendering of Bangla characters using 15+ custom fonts. A simple solution focused solely on Bangla font issues.Nothing more, nothing less.
+
+> **Note:** This only fixes Bangla fonts.  
+> For full multilingual support and highly optimized PDF generation, use our new package [`pdf_maker`](https://pub.dev/packages/pdf_maker), which supports multiple languages and offers advanced features.
 
 ![Bangla PDF Fixer](https://github.com/arrahmanbd/bangla_pdf_fixer/raw/master/images/pdf_fixer.png)
 
 ## Features
 
-- Includes over 10 Bangla fonts, allowing you to easily customize the appearance of your PDF documents.
+- Includes over 15+ Bangla fonts, allowing you to easily customize the appearance of your PDF documents.
 - Rearrange complex Bangla characters for correct display.
 - Easy integration into Flutter projects for PDF generation and text correction.
 
@@ -20,7 +23,7 @@ Add this package to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  bangla_pdf_fixer: ^1.0.2
+  bangla_pdf_fixer: ^2.0.0
 ```
 
 Run flutter pub get to install the package.
@@ -43,6 +46,8 @@ Open the PDF using the open_file package to display it with the default PDF view
 
 
 ## Full Example  👨‍💻
+
+Check out the Example app. Here's a simple explanation:
 
 ```dart
 import 'package:bangla_pdf_fixer/bangla_pdf_fixer.dart';
@@ -83,7 +88,7 @@ Future<void> generateAndOpenInvoice() async {
 
 ## Change the Default Font 🔧
 
-The bangla_pdf_fixer package includes over 10 Bangla fonts, allowing you to easily customize the appearance of your PDF documents. To change the default font, use the GetFonts class to access the desired font and load it with the FontManager. Here's an example of how to change font:
+The bangla_pdf_fixer package includes over 15+ Bangla fonts, allowing you to easily customize the appearance of your PDF documents. To change the default font, use the GetFonts class to access the desired font and load it with the FontManager. Here's an example of how to change font:
 
 ```dart
 final fontData = await FontManager.loadFont(GetFonts.charukola);
@@ -92,7 +97,9 @@ final fontData = await FontManager.loadFont(GetFonts.charukola);
 
 ## Demo Preview 📥
 
-[Click here to check the output file](example/invoice.pdf)
+[Click here to check the output file](demo/invoice.pdf)
+
+
 
 ## Contributing 🚀
 
@@ -104,7 +111,7 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ## Author
 
-Bangla PDF Fixer is maintained by AR Rahman. You can contact me at [arrahman.bd@outlook.com](mailto:arrahman.bd@outlook.com).
+Bangla PDF Fixer is maintained by AR Rahman. You can contact me at [arrahman.dev@outlook.com](mailto:arrahman.dev@outlook.com).
 
 ## Special Thanks 🙏✨
 

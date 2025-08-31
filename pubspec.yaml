@@ -1,7 +1,18 @@
 name: bangla_pdf_fixer
 description: A package to fix broken font issues in PDFs for Bangla text.
-version: 1.0.2
+version: 2.0.0-dev.1
 homepage: https://github.com/arrahmanbd/bangla_pdf_fixer
+issue_tracker: https://github.com/arrahmanbd/bangla_pdf_fixer/issues
+documentation: https://github.com/arrahmanbd/bangla_pdf_fixer/wiki
+screenshots:
+  - description: 'bangla_pdf_fixer Preview'
+    path: images/iphone_preview.png
+topics:
+  - flutter
+  - pdf
+  - bangla
+  - fonts
+  - pdf-generation
 
 environment:
   sdk: ^3.5.4
@@ -11,6 +22,7 @@ dependencies:
   flutter:
     sdk: flutter
   plugin_platform_interface: ^2.0.2
+  
 
 dev_dependencies:
   flutter_test:
@@ -21,14 +33,26 @@ dev_dependencies:
 flutter:
   # Update the pubspec.yaml file to include the font in the lib/fonts section.
   assets:
-      - lib/fonts/AdorOrjoma/
-      - lib/fonts/CharuChandan/
-      - lib/fonts/CharuChandanBloodDrip/
-      - lib/fonts/Charukola/
-      - lib/fonts/Default/
-      - lib/fonts/DiproAD/
-      - lib/fonts/LipiPadmo/
-      - lib/fonts/Nondon/
-      - lib/fonts/Rajnigandha/
-      - lib/fonts/RuposhiBangla/
-      - lib/fonts/Tomalicca/
+    - lib/fonts/AdorOrjoma/Ador_Orjoma.ttf
+    - lib/fonts/CharuChandan/Charu_Chandan_Regular.ttf
+    - lib/fonts/CharuChandanBloodDrip/Charu_Chandan_Blood_Regular.ttf
+    - lib/fonts/Charukola/Charukola_Ansi_Regular.ttf
+    - lib/fonts/Default/kalpona.ttf
+    - lib/fonts/Default/kalpurush.ttf
+    - lib/fonts/DiproAD/DiproAD_Regular.ttf
+    - lib/fonts/Jashir/jashir-italic.ttf
+    - lib/fonts/Jashir/jashir.ttf
+    - lib/fonts/July/july-italic.ttf
+    - lib/fonts/July/july.ttf
+    - lib/fonts/LipiPadmo/Lipi-Padmo.ttf
+    - lib/fonts/Mayaboti/mayaboti-Italic.ttf
+    - lib/fonts/Mayaboti/mayaboti.ttf
+    - lib/fonts/Nondon/Nondon.ttf
+    - lib/fonts/Rajnigandha/Rajnigandha.ttf
+    - lib/fonts/RuposhiBangla/Ruposhi_Bangla.ttf
+    - lib/fonts/SonarKella/sonarkella-italic.ttf
+    - lib/fonts/SonarKella/sonarkella.ttf
+    - lib/fonts/Tomalicca/TOMALICCA.ttf
+    - lib/fonts/Trinoyon/trinoyon-italic.ttf
+    - lib/fonts/Trinoyon/trinoyon.ttf
+    
