@@ -1,5 +1,4 @@
-import 'package:flutter/services.dart';
-import 'unicode_mapper.dart';
+part of 'package:bangla_pdf_fixer/bangla_pdf_fixer.dart';
 
 extension UnicodeFixerExtension on String {
   String fix() {

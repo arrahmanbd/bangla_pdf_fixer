@@ -1,6 +1,6 @@
 name: bangla_pdf_fixer
 description: A package to fix broken font issues in PDFs for Bangla text.
-version: 2.0.0-dev.1
+version: 2.0.0-rc.1
 homepage: https://github.com/arrahmanbd/bangla_pdf_fixer
 issue_tracker: https://github.com/arrahmanbd/bangla_pdf_fixer/issues
 documentation: https://github.com/arrahmanbd/bangla_pdf_fixer/wiki

@@ -1,5 +1,7 @@
 library fix_bangla_pdf;
 
+import 'package:flutter/services.dart';
+
 /*
  * Copyright (C) 2024, AR RAHMAN <arrahmanbd.dev@gmail.com>
  *
@@ -15,6 +17,7 @@ library fix_bangla_pdf;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export 'src/utils/fixing_utils.dart';
-export 'gen/fonts_gen.dart';
-export 'src/helper/font_manager.dart';
+part 'src/utils/fixing_utils.dart';
+part 'gen/fonts_gen.dart';
+part 'src/helper/font_manager.dart';
+part 'src/utils/unicode_mapper.dart';

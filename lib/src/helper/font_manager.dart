@@ -1,4 +1,4 @@
-import 'package:flutter/services.dart';
+part of 'package:bangla_pdf_fixer/bangla_pdf_fixer.dart';
 
 class FontManager {
   //Load Fonts as byteData

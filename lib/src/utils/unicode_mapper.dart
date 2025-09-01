@@ -1,4 +1,4 @@
-import 'dart:core';
+part of 'package:bangla_pdf_fixer/bangla_pdf_fixer.dart';
 
 /// What It Does?:
 // The code is essentially a Bangla text renderer or converter that ensures:

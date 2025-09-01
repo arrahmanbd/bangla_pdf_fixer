@@ -1,4 +1,10 @@
-# 2.0.0-dev.1
+# 2.0.0-rc.1
+
+- Refactored the codebase in preparation for the final release.  
+- Added a plan to implement a custom component for Bangla text rendering.  
+- Prepared staging environment to officially support the PDF package. 
+
+## 2.0.0-dev.1
 
 - Migrated into latest SDK
 - Updated Documentation
