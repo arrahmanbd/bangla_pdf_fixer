@@ -1,4 +1,36 @@
-# 2.0.0-rc.1
+# 2.0
+
+## Whats New?
+
+### Font Management
+
+- `BanglaFontManager` for asynchronous font loading and caching.
+- `BanglaFontType` enum listing 22+ Bangla fonts.
+- `BanglaFontTypeExtension`:
+  - `ts()` – returns ready-to-use `pw.TextStyle`.
+  - `text()` – returns ready-to-use `pw.Text` widget.
+- `BanglaTextExtension` on String:
+  - `isBanglaText` – detects Bangla characters.
+  - `fix` – auto-fixes Bangla text to ANSI if needed.
+
+### Widgets
+
+- `BanglaText` – simple Bangla text widget for PDFs.
+- `BanglaRichText` – rich text with multiple Bangla spans.
+- `BanglaTextSpan` – span object for `BanglaRichText`.
+- `BanglaHeader` – PDF header widget with Bangla font.
+- `BanglaParagraph` – paragraph widget supporting Bangla text.
+- `BanglaBulletList` – bullet list widget supporting Bangla text.
+- `BanglaTable` – table widget with Bangla headers and cells.
+
+### Features
+
+- Automatic Bangla font assignment for all widgets.
+- Supports font size, font weight, color, and text alignment.
+- Reduces boilerplate: no need to call `BanglaFontManager().getFont(...)` repeatedly.
+- Fully compatible with `pdf` and `printing` packages for Flutter.
+
+## 2.0.0-rc.1
 
 - Refactored the codebase in preparation for the final release.  
 - Added a plan to implement a custom component for Bangla text rendering.  

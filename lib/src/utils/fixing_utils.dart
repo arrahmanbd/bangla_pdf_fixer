@@ -1,11 +1,5 @@
 part of 'package:bangla_pdf_fixer/bangla_pdf_fixer.dart';
 
-extension UnicodeFixerExtension on String {
-  String fix() {
-    return BanglaUnicodeMapper.encodeANSI(this);
-  }
-}
-
 // More Helper Methods will added Here
 //
 class FixingUtils {
@@ -20,7 +14,7 @@ class FixingUtils {
     return tableData.map((row) {
       return row.map((cell) {
         // Apply the toFixedUnicode method to each cell if it's a Bangla text
-        return cell.fix();
+        return cell.fix;
       }).toList();
     }).toList();
   }

@@ -1,6 +1,9 @@
 library fix_bangla_pdf;
 
 import 'package:flutter/services.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/pdf.dart' as pw show PdfColor;
+import 'package:pdf/widgets.dart' as pw;
 
 /*
  * Copyright (C) 2024, AR RAHMAN <arrahmanbd.dev@gmail.com>
@@ -21,3 +24,7 @@ part 'src/utils/fixing_utils.dart';
 part 'gen/fonts_gen.dart';
 part 'src/helper/font_manager.dart';
 part 'src/utils/unicode_mapper.dart';
+part 'src/widgets/fx_widgets.dart';
+part 'src/core/font_manager.dart';
+part 'src/widgets/fx_more.dart';
+part 'gen/true_type.dart';

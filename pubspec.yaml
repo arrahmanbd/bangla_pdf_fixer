@@ -1,12 +1,14 @@
 name: bangla_pdf_fixer
 description: A package to fix broken font issues in PDFs for Bangla text.
-version: 2.0.0-rc.1
+version: 2.0.0
 homepage: https://github.com/arrahmanbd/bangla_pdf_fixer
 issue_tracker: https://github.com/arrahmanbd/bangla_pdf_fixer/issues
 documentation: https://github.com/arrahmanbd/bangla_pdf_fixer/wiki
 screenshots:
   - description: 'bangla_pdf_fixer Preview'
     path: images/iphone_preview.png
+  - description: 'bangla_pdf_fixer Preview2'
+    path: images/iphone_preview2.png
 topics:
   - flutter
   - pdf
@@ -21,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  pdf: ^3.11.3
   plugin_platform_interface: ^2.0.2
   
 
@@ -39,6 +42,7 @@ flutter:
     - lib/fonts/Charukola/Charukola_Ansi_Regular.ttf
     - lib/fonts/Default/kalpona.ttf
     - lib/fonts/Default/kalpurush.ttf
+    - lib/fonts/Default/OpenSans.ttf
     - lib/fonts/DiproAD/DiproAD_Regular.ttf
     - lib/fonts/Jashir/jashir-italic.ttf
     - lib/fonts/Jashir/jashir.ttf

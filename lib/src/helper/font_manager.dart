@@ -1,23 +1,57 @@
 part of 'package:bangla_pdf_fixer/bangla_pdf_fixer.dart';
 
-class FontManager {
-  //Load Fonts as byteData
-  static Future<ByteData> loadFont(String fontPath) async {
-    return await rootBundle.load(fontPath);
+extension BanglaTextExtension on String {
+  bool get isBanglaText => BanglaFontManager.isBanglaText(this);
+
+  /// Fixes the Bangla text by mapping it to ANSI (if Bangla).
+  String get fix => isBanglaText ? BanglaUnicodeMapper.encodeANSI(this) : this;
+}
+
+extension BanglaFontTypeExtension on BanglaFontType {
+  /// Returns a ready-to-use pw.TextStyle with this Bangla font
+  pw.TextStyle ts({
+    double fontSize = 16,
+    pw.FontWeight fontWeight = pw.FontWeight.normal,
+    pw.PdfColor color = PdfColors.black,
+  }) {
+    return pw.TextStyle(
+      font: BanglaFontManager().getFont(this),
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      color: color,
+    );
   }
 
-  /// Function to load a TTF font from byte data and return the font family name
-  static Future<String> loadFontAndReturnFamily(
-      String fontPath, String fontFamilyName) async {
-    try {
-      final fontData =
-          await loadFont(fontPath).then((data) => data.buffer.asUint8List());
-      final fontLoader = FontLoader(fontFamilyName)
-        ..addFont(Future.value(ByteData.sublistView(fontData)));
-      await fontLoader.load();
-      return fontFamilyName;
-    } catch (e) {
-      throw Exception("Error loading font: $e");
-    }
+  /// Get a ready-to-use TextStyle for this font
+  pw.TextStyle style({
+    double fontSize = 16,
+    pw.FontWeight fontWeight = pw.FontWeight.normal,
+    pw.PdfColor color = PdfColors.black,
+  }) {
+    return pw.TextStyle(
+      font: BanglaFontManager().getFont(this),
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      color: color,
+    );
+  }
+
+  /// Shortcut to create a BanglaText widget
+  pw.Widget text(
+    String text, {
+    double fontSize = 16,
+    pw.FontWeight fontWeight = pw.FontWeight.normal,
+    pw.PdfColor color = PdfColors.black,
+    pw.TextAlign textAlign = pw.TextAlign.start,
+  }) {
+    return pw.Text(
+      text.fix,
+      style: style(
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+        color: color,
+      ),
+      textAlign: textAlign,
+    );
   }
 }

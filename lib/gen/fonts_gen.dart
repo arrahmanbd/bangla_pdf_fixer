@@ -1,11 +1,3 @@
-/// GENERATED CODE - DO NOT MODIFY BY HAND
-/// *****************************************************
-///  Static FontAssets
-/// *****************************************************
-
-// coverage:ignore-file
-// ignore_for_file: type=lint
-// ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 part of 'package:bangla_pdf_fixer/bangla_pdf_fixer.dart';
 
 const package = 'packages/bangla_pdf_fixer/lib';
