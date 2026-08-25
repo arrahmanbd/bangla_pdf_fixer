@@ -34,7 +34,7 @@ Benefits:
 - no giant replacement map;
 - no package-bundled third-party fonts;
 - PDFs can retain useful copy/search text;
-- See the [demo document](demo/doc.pdf) for more.
+- See the [demo document](https://github.com/ardevcraft/bangla_pdf_fixer/blob/master/demo/doc.pdf) for more.
 
 
 ## Platforms
