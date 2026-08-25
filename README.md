@@ -1,6 +1,6 @@
- >> Correct Bangla/Bengali Unicode rendering in PDFs generated with Flutter's `pdf` package.
+ > Correct Bangla/Bengali Unicode rendering in PDFs generated with Flutter's `pdf` package.
 
-![Bangla PDF Fixer](https://github.com/arrahmanbd/bangla_pdf_fixer/raw/master/images/pdf_fixer.png)
+![Bangla PDF Fixer](https://github.com/ardevcraft/bangla_pdf_fixer/raw/master/images/pdf_fixer.png)
 Version 3 is a full architectural reset. It uses [`pdf_text_shaper`](https://pub.dev/packages/pdf_text_shaper) + HarfBuzz for proper OpenType shaping instead of translating Bangla Unicode into legacy ANSI font codes.
 
 ## What changed in 3.0
