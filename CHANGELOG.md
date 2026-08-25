@@ -1,61 +1,31 @@
-# 2.0
+## 3.1.1
 
-## Whats New?
+- Hardened `BanglaFontManager` caching and cleanup.
+- Failed asset loads are now evicted automatically and can be retried.
+- Font caching now distinguishes different `AssetBundle` instances.
+- Added `preloadAssets`, `isCached`, and `evict` font-manager APIs.
+- Added `BanglaTypography` for reusable regular/bold/fallback style setup.
+- `BanglaHeader` and `BanglaParagraph` now accept either `style` or `font`.
+- Improved `BanglaBulletList` with custom style, line height, indentation,
+  marker size/gap/color, and empty-list handling.
+- Improved `BanglaRichText` with reusable fallback fonts, per-span styles,
+  line height, Unicode preservation, and wrap alignment controls.
+- Improved `BanglaTable` with header/body text colors, line heights,
+  alternating row backgrounds, multiple header rows, text alignment,
+  border width, repeating header rows, and dedicated header fallback fonts.
+- Fixed table cells ignoring configured text color.
+- Added `containsBangla` and strict `isBanglaOnly` string helpers.
+- Re-exported `ShapedText` from the package facade.
 
-### Font Management
+## 3.0.0
 
-- `BanglaFontManager` for asynchronous font loading and caching.
-- `BanglaFontType` enum listing 22+ Bangla fonts.
-- `BanglaFontTypeExtension`:
-  - `ts()` – returns ready-to-use `pw.TextStyle`.
-  - `text()` – returns ready-to-use `pw.Text` widget.
-- `BanglaTextExtension` on String:
-  - `isBanglaText` – detects Bangla characters.
-  - `fix` – auto-fixes Bangla text to ANSI if needed.
-
-### Widgets
-
-- `BanglaText` – simple Bangla text widget for PDFs.
-- `BanglaRichText` – rich text with multiple Bangla spans.
-- `BanglaTextSpan` – span object for `BanglaRichText`.
-- `BanglaHeader` – PDF header widget with Bangla font.
-- `BanglaParagraph` – paragraph widget supporting Bangla text.
-- `BanglaBulletList` – bullet list widget supporting Bangla text.
-- `BanglaTable` – table widget with Bangla headers and cells.
-
-### Features
-
-- Automatic Bangla font assignment for all widgets.
-- Supports font size, font weight, color, and text alignment.
-- Reduces boilerplate: no need to call `BanglaFontManager().getFont(...)` repeatedly.
-- Fully compatible with `pdf` and `printing` packages for Flutter.
-
-## 2.0.0-rc.1
-
-- Refactored the codebase in preparation for the final release.  
-- Added a plan to implement a custom component for Bangla text rendering.  
-- Prepared staging environment to officially support the PDF package. 
-
-## 2.0.0-dev.1
-
-- Migrated into latest SDK
-- Updated Documentation
-- Added cleaner example
-- Added New Fonts..
-  - 36th July
-  - Mayaboti and 5 new fonts
-- Upgrade Code for cleaner approach
-- Staging for 2.0 release
-- Implemeting own component based on pdf package
-
-## 1.0.2
-
-- Improved Documentation.
-- Added more Bangla fonts.
-
-## 1.0.0
-
-- Initial release of the **Bangla PDF Fixer** package 2024-01-18.
-- Added support for multiple Bangla fonts.
-- Implemented font fixing for PDFs with broken fonts.
-- Fixed various issues with font rendering.
+- Rebuilt Bangla rendering on top of `pdf_text_shaper`.
+- Replaced legacy ANSI mapping with Unicode-first HarfBuzz shaping.
+- Removed bundled fonts and `BanglaFontType`.
+- Added lazy Flutter asset font loading.
+- Preserved the deprecated `.fix` getter as a no-op migration bridge.
+- Added Unicode-preserving PDF text mode through the universal renderer.
+- Added Bangla text, header, paragraph, bullet-list, rich-text, and table
+  helpers.
+- Updated project links to the `ardevcraft` GitHub account.
+- Raised minimum SDK to Dart 3.13 because of the native HarfBuzz backend.

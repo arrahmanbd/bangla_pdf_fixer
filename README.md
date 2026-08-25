@@ -1,272 +1,280 @@
-
-# Bangla PDF Fixer 🔧
-
-[![Stand With Palestine](https://github.com/arrahmanbd/bangla_pdf_fixer/raw/master/images/StandWithPalestine.svg)](https://pub.dev/packages/bangla_pdf_fixer)
-
-**Bangla PDF Fixer** is a Flutter package designed to **fix broken Bangla fonts in PDFs**, ensuring accurate rendering of Bangla characters with **22+ high-quality custom fonts**.
-
-A lightweight, focused solution for Bangla font issues—**nothing more, nothing less**.
-
-> **Note:** This package focuses exclusively on Bangla font correction.
-> For advanced PDF generation features, consider [`pdf_maker`](https://pub.dev/packages/pdf_maker).
+ >> Correct Bangla/Bengali Unicode rendering in PDFs generated with Flutter's `pdf` package.
 
 ![Bangla PDF Fixer](https://github.com/arrahmanbd/bangla_pdf_fixer/raw/master/images/pdf_fixer.png)
+Version 3 is a full architectural reset. It uses [`pdf_text_shaper`](https://pub.dev/packages/pdf_text_shaper) + HarfBuzz for proper OpenType shaping instead of translating Bangla Unicode into legacy ANSI font codes.
 
----
+## What changed in 3.0
 
-## Features
+### Before
 
-* **22+ Bangla fonts** for effortless customization of PDF text.
-* Automatically **rearranges complex Bangla characters** for correct display.
-* Seamless integration with **Flutter PDF generation workflows**.
-* Ready-to-use **Bangla widgets**: text, headers, paragraphs, tables, and bullet lists.
+```text
+Bangla Unicode
+→ handwritten rearrangement rules
+→ ANSI/legacy character mapping
+→ bundled legacy font
+→ PDF
+```
 
----
+### Now
+
+```text
+Bangla Unicode
+→ HarfBuzz GSUB/GPOS shaping
+→ positioned glyph IDs
+→ vector glyph rendering
+→ invisible Unicode extraction layer
+→ PDF
+```
+
+Benefits:
+
+- conjuncts and vowel signs are driven by the font's real OpenType rules;
+- original Unicode is never destroyed;
+- multiline input stays multiline;
+- no giant replacement map;
+- no package-bundled third-party fonts;
+- PDFs can retain useful copy/search text;
+- See the [demo document](demo/doc.pdf) for more.
+
+
+## Platforms
+
+Android, iOS, Linux, macOS and Windows.
+
+Web is not currently supported because the shaping backend uses native
+HarfBuzz FFI.
+
+### Legacy ANSI fonts
+
+Do not use a legacy ```Bijoy/ANSI``` font with the Unicode shaper. Use a proper Unicode OpenType Bengali font.
 
 ## Installation
 
-Add to your `pubspec.yaml`:
-
 ```yaml
 dependencies:
-  bangla_pdf_fixer: ^2.0.0
+  bangla_pdf_fixer: ^3.1.0
+  pdf: ^3.13.0
 ```
 
-Install packages:
+Add a Unicode Bengali OpenType font to your app:
 
-```bash
-flutter pub get
+```yaml
+flutter:
+  assets:
+    - assets/fonts/NotoSansBengali-Regular.ttf
+    - assets/fonts/NotoSansBengali-Bold.ttf
 ```
 
----
+The package intentionally does not bundle fonts. Make sure the font license
+permits your use.
 
-## Usage ✨
-
-> **[Note] BanglaFontType: 🎨**
-> The `BanglaFontType` class is a centralized enum of 22+ Bangla fonts for PDF generation. It simplifies working with Bangla text in Flutter by providing **ready-to-use `pw.TextStyle` and `pw.Text` widgets**, making font assignment seamless and reducing boilerplate.
-
----
-
-### Step 1: Initialize Fonts
-
-Before using any widgets, initialize the font manager:
+## Load fonts
 
 ```dart
-await BanglaFontManager().initialize();
+final regular = await BanglaFontManager.instance.loadAsset(
+  'assets/fonts/NotoSansBengali-Regular.ttf',
+  name: 'Noto Sans Bengali Regular',
+);
+
+final bold = await BanglaFontManager.instance.loadAsset(
+  'assets/fonts/NotoSansBengali-Bold.ttf',
+  name: 'Noto Sans Bengali Bold',
+);
 ```
 
-This ensures all fonts are loaded and ready for use.
+Repeated/concurrent requests for the same asset share the cache. A failed load
+is evicted automatically so it can be retried.
 
----
+## BanglaText
 
-### Step 2: Fix Bangla Text in PDFs
-
-Use the `.fix` extension to automatically correct broken Bangla text:
+Use the concise font API:
 
 ```dart
 BanglaText(
-  'বাংলা সাধারণ টেক্সট',
-  fontType: BanglaFontType.kalpurush,
-  fontSize: 20,
-),
-pw.SizedBox(height: 10),
-pw.Text(
-  'বেঁচে থাকার মত আনন্দ আর কিছুই নেই।'.fix,
-  style: BanglaFontType.july.ts(
-    fontSize: 24,
-    fontWeight: pw.FontWeight.bold,
-    color: PdfColors.red,
+  'আমি বাংলায় লিখছি।',
+  font: regular,
+  fontSize: 16,
+)
+```
+
+Or pass the underlying shaping style directly:
+
+```dart
+BanglaText(
+  'Invoice ১২৩ — মোট ৳৫০০',
+  style: ShapedTextStyle(
+    font: regular,
+    fallbackFonts: [latinFont],
+    fontSize: 14,
+    preserveUnicodeText: true,
   ),
+)
+```
+
+## Reusable typography
+
+For larger documents, define the font/fallback family once:
+
+```dart
+final typography = BanglaTypography(
+  regularFont: regular,
+  boldFont: bold,
+  fallbackFonts: [latinRegular],
+  boldFallbackFonts: [latinBold],
+);
+```
+
+Then reuse it:
+
+```dart
+BanglaHeader(
+  'ফলাফল প্রতিবেদন',
+  style: typography.heading(fontSize: 24),
+),
+
+BanglaParagraph(
+  'বাংলা অনুচ্ছেদ এখন আসল Unicode হিসেবেই থাকে।',
+  style: typography.body(fontSize: 12),
 ),
 ```
 
-> Most widgets apply `.fix` internally, so manual usage is optional. 
-
----
-
-## Example: Generate a PDF in Flutter
-
-```dart
-import 'package:bangla_pdf_fixer/bangla_pdf_fixer.dart';
-import 'package:pdf/widgets.dart' as pw;
-import 'package:path_provider/path_provider.dart';
-import 'package:open_file/open_file.dart';
-import 'dart:io';
-
-Future<void> generateAndOpenPdf() async {
-  await BanglaFontManager().initialize();
-
-  final pdf = pw.Document();
-
-  pdf.addPage(
-    pw.Page(
-      build: (context) => pw.Column(
-        crossAxisAlignment: pw.CrossAxisAlignment.start,
-        children: [
-          BanglaText(
-            'বাংলা সাধারণ টেক্সট',
-            fontType: BanglaFontType.kalpurush,
-            fontSize: 20,
-          ),
-          pw.SizedBox(height: 10),
-          pw.Text(
-            'বেঁচে থাকার মত আনন্দ আর কিছুই নেই।'.fix,
-            style: BanglaFontType.july.ts(
-              fontSize: 24,
-              fontWeight: pw.FontWeight.bold,
-              color: PdfColors.red,
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-
-  final dir = await getApplicationDocumentsDirectory();
-  final file = File("${dir.path}/example.pdf");
-  await file.writeAsBytes(await pdf.save());
-  await OpenFile.open(file.path);
-}
-```
-
----
-
-## Step 3: Use PDF Fixer Widgets
-
-Bangla PDF Fixer provides **ready-to-use widgets** that automatically handle font corrections:
-
-* [**BanglaText**](#1-banglatext) – Basic Bangla text
-* [**BanglaRichText**](#2-banglarichtext) – Multi-style text spans
-* [**BanglaHeader**](#3-banglaheader) – Bold headers
-* [**BanglaParagraph**](#4-banglaparagraph) – Properly formatted paragraphs
-* [**BanglaBulletList**](#5-banglabulletlist) – Bullet lists
-* [**BanglaTable**](#6-banglatable) – Tables with headers and formatted cells
-
-These widgets integrate seamlessly with the [pdf package](https://pub.dev/packages/pdf), allowing you to **focus on content while the package handles Bangla text corrections**.
-
----
-
-### 1. BanglaText
-
-```dart
-BanglaText(
-  'বাংলা সাধারণ টেক্সট',
-  fontType: BanglaFontType.kalpurush,
-  fontSize: 18,
-);
-```
-
-### 2. BanglaRichText
-
-```dart
-BanglaRichText(
-  spans: [
-    BanglaTextSpan('বাংলা বোল্ড ', fontWeight: pw.FontWeight.bold),
-    BanglaTextSpan('এবং ইটালিক', fontType: BanglaFontType.julyItalic),
-  ],
-);
-```
-
-### 3. BanglaHeader
-
-```dart
-BanglaHeader('বাংলা শিরোনাম');
-```
-
-### 4. BanglaParagraph
-
-```dart
-BanglaParagraph('বাংলা অনুচ্ছেদ এখানে লেখা হবে।');
-```
-
-### 5. BanglaBulletList
+## Bullet list
 
 ```dart
 BanglaBulletList(
-  items: ['প্রথম আইটেম', 'দ্বিতীয় আইটেম', 'তৃতীয় আইটেম'],
-  bullet: '>',
-);
-```
-
-### 6. BanglaTable
-
-```dart
-BanglaTable(
-  data: [
-    ['নাম', 'বয়স', 'শহর'],
-    ['আহমেদ', '২৫', 'ঢাকা'],
-    ['সারা', '৩০', 'চট্টগ্রাম'],
-    ['রাহুল', '২৮', 'সিলেট'],
+  font: regular,
+  fontSize: 13,
+  lineHeight: 1.3,
+  markerGap: 8,
+  items: const [
+    'প্রথম বিষয়',
+    'দ্বিতীয় বিষয়',
+    'তৃতীয় বিষয়',
   ],
-  fontType: BanglaFontType.tomalicca,
-  fontSize: 16,
-  fontWeight: pw.FontWeight.normal,
-);
+)
 ```
 
----
+You can also pass a complete `ShapedTextStyle` instead of separate font/style
+arguments.
 
-## Step 4: TextStyle & Widget Shortcuts
+## Rich text
+
+`BanglaRichText` is intended for short mixed-style labels/headings. Each run is
+independently shaped so it can flow through `pw.Wrap`.
 
 ```dart
-// TextStyle shortcut
-pw.Text(
-  'বাংলা শিরোনাম'.fix,
-  style: BanglaFontType.july.ts(
-    fontSize: 24,
-    fontWeight: pw.FontWeight.bold,
-    color: PdfColors.red,
-  ),
-);
-
-// Text widget shortcut
-BanglaFontType.kalpurush.text(
-  'বাংলা লেখা',
-  fontSize: 18,
-  color: PdfColors.black,
-);
+BanglaRichText(
+  font: regular,
+  fallbackFonts: [latinRegular],
+  spans: [
+    const BanglaTextSpan('মোট: '),
+    BanglaTextSpan(
+      '৳১২,৫০০',
+      style: typography.style(bold: true, fontSize: 14),
+    ),
+  ],
+)
 ```
 
----
+For long flowing body text, prefer `BanglaText` or `BanglaParagraph` so the
+shaping engine owns the complete paragraph layout.
 
-## Demo Preview 📥
+## Table
 
-View a **sample PDF output**:
+```dart
+BanglaTable.fromRows(
+  font: regular,
+  headerFont: bold,
+  headerColor: PdfColors.blueGrey50,
+  alternateRowColor: PdfColors.grey50,
+  headers: const ['নাম', 'শ্রেণি', 'ফলাফল'],
+  rows: const [
+    ['আরিফ', 'দশম', 'A+'],
+    ['নাবিলা', 'নবম', 'A'],
+  ],
+)
+```
 
-[Click here to check the demo PDF](https://github.com/arrahmanbd/bangla_pdf_fixer/raw/master/demo/invoice.pdf)
+Or use `BanglaTable(data: ...)` when you already have a complete matrix. The
+first row is treated as a header by default; set `headerRows: 0` for a table
+without headers. Header rows repeat automatically when a table spans pages; set
+`repeatHeaderRows: false` to disable that behavior.
 
----
+## Text detection
 
-## Contributing 🚀
+```dart
+'Invoice ১২৩'.containsBangla; // true
+'আমি বাংলা লিখি'.isBanglaOnly; // true
+```
 
-Contributions are welcome! Whether you want to:
+`isBanglaText` remains available as a compatibility alias for
+`containsBangla`.
 
-* Report a bug
-* Suggest a feature
-* Improve widgets or documentation
 
-**Fork the repository, make changes, and submit a Pull Request**. Together, we can enhance Bangla PDF Fixer! 💡
+## Mixed Bangla + English
 
----
+Use the universal style's fallback support:
 
-## License
+```dart
+BanglaText(
+  'Invoice ১২৩ — মোট ৳৫০০',
+  style: ShapedTextStyle(
+    font: banglaFont,
+    fallbackFonts: [latinFont],
+    fontSize: 14,
+  ),
+)
+```
 
-This project is licensed under the **Apache License 2.0**.
-Read the full license [here](https://www.apache.org/licenses/LICENSE-2.0).
+## Migration from 2.x
 
----
+### `.fix`
+
+You no longer need:
+
+```dart
+'বাংলা'.fix
+```
+
+The deprecated getter remains as an identity operation for migration only.
+Pass the original Unicode string directly to `BanglaText`.
+
+## Font lifecycle
+
+The singleton manager is designed for long-running Flutter apps. Keep commonly
+used fonts cached while generating PDFs and dispose them when the font service
+is genuinely being torn down:
+
+```dart
+
+await document.save();
+await BanglaFontManager.instance.dispose();
+```
+
+You can evict one asset when needed:
+
+```dart
+await BanglaFontManager.instance.evict(
+  'assets/fonts/NotoSansBengali-Regular.ttf',
+);
+```
 
 ## Author
 
 Maintained by **AR Rahman**
-Contact: [arrahman.dev@outlook.com](mailto:arrahman.dev@outlook.com)
+GitHub: [@ardevcraft](https://github.com/ardevcraft)
 
----
+Crafted with ❤️ for **Bangla** and the open-source community. 🇧🇩
 
-## Special Thanks 🙏✨
+[![Stand With Palestine](https://github.com/ardevcraft/bangla_pdf_fixer/raw/master/images/StandWithPalestine.svg)](https://pub.dev/packages/bangla_pdf_fixer)
 
-A big thank you to all **Bangla font creators and contributors**. Your efforts make **high-quality, beautiful Bangla PDFs** possible. 💖
 
----
+## Repository
 
-⭐ If you find Bangla PDF Fixer helpful, please **star the repository**!
+https://github.com/ardevcraft/bangla_pdf_fixer
+
+Contributions, bug reports, feature requests, and pull requests are welcome.
+
+## License
+
+Licensed under the **Apache License 2.0**.
