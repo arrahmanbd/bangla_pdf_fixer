@@ -33,3 +33,7 @@ topics:
   - pdf
   - unicode
   - typography
+
+screenshots:
+  - description: 'PDF Fixer Icon'
+    path: 'images/icon.png'

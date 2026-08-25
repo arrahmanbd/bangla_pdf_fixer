@@ -5,11 +5,11 @@
   "packages": [
     {
       "name": "bangla_pdf_fixer",
-      "version": "2.0.0",
+      "version": "3.1.1",
       "dependencies": [
         "flutter",
         "pdf",
-        "plugin_platform_interface"
+        "pdf_text_shaper"
       ],
       "devDependencies": [
         "flutter_lints",
@@ -17,50 +17,33 @@
       ]
     },
     {
+      "name": "flutter_test",
+      "version": "0.0.0",
+      "dependencies": [
+        "clock",
+        "collection",
+        "fake_async",
+        "flutter",
+        "leak_tracker_flutter_testing",
+        "matcher",
+        "meta",
+        "path",
+        "stack_trace",
+        "stream_channel",
+        "test_api",
+        "vector_math"
+      ]
+    },
+    {
       "name": "flutter_lints",
-      "version": "4.0.0",
+      "version": "6.0.0",
       "dependencies": [
         "lints"
       ]
     },
     {
-      "name": "flutter_test",
-      "version": "0.0.0",
-      "dependencies": [
-        "async",
-        "boolean_selector",
-        "characters",
-        "clock",
-        "collection",
-        "fake_async",
-        "flutter",
-        "leak_tracker",
-        "leak_tracker_flutter_testing",
-        "leak_tracker_testing",
-        "matcher",
-        "material_color_utilities",
-        "meta",
-        "path",
-        "source_span",
-        "stack_trace",
-        "stream_channel",
-        "string_scanner",
-        "term_glyph",
-        "test_api",
-        "vector_math",
-        "vm_service"
-      ]
-    },
-    {
-      "name": "plugin_platform_interface",
-      "version": "2.1.8",
-      "dependencies": [
-        "meta"
-      ]
-    },
-    {
       "name": "pdf",
-      "version": "3.11.3",
+      "version": "3.13.0",
       "dependencies": [
         "archive",
         "barcode",
@@ -86,25 +69,13 @@
       ]
     },
     {
-      "name": "lints",
-      "version": "4.0.0",
-      "dependencies": []
-    },
-    {
-      "name": "vm_service",
-      "version": "15.0.0",
-      "dependencies": []
-    },
-    {
-      "name": "term_glyph",
-      "version": "1.2.2",
-      "dependencies": []
-    },
-    {
-      "name": "string_scanner",
-      "version": "1.4.1",
+      "name": "pdf_text_shaper",
+      "version": "1.1.0",
       "dependencies": [
-        "source_span"
+        "characters",
+        "ffi",
+        "harfbuzz_ffi",
+        "pdf"
       ]
     },
     {
@@ -115,45 +86,9 @@
       ]
     },
     {
-      "name": "source_span",
-      "version": "1.10.1",
-      "dependencies": [
-        "collection",
-        "path",
-        "term_glyph"
-      ]
-    },
-    {
       "name": "meta",
-      "version": "1.16.0",
+      "version": "1.19.0",
       "dependencies": []
-    },
-    {
-      "name": "material_color_utilities",
-      "version": "0.11.1",
-      "dependencies": [
-        "collection"
-      ]
-    },
-    {
-      "name": "leak_tracker_testing",
-      "version": "3.0.1",
-      "dependencies": [
-        "leak_tracker",
-        "matcher",
-        "meta"
-      ]
-    },
-    {
-      "name": "leak_tracker",
-      "version": "10.0.9",
-      "dependencies": [
-        "clock",
-        "collection",
-        "meta",
-        "path",
-        "vm_service"
-      ]
     },
     {
       "name": "collection",
@@ -161,29 +96,8 @@
       "dependencies": []
     },
     {
-      "name": "characters",
-      "version": "1.4.0",
-      "dependencies": []
-    },
-    {
-      "name": "boolean_selector",
-      "version": "2.1.2",
-      "dependencies": [
-        "source_span",
-        "string_scanner"
-      ]
-    },
-    {
-      "name": "async",
-      "version": "2.13.0",
-      "dependencies": [
-        "collection",
-        "meta"
-      ]
-    },
-    {
       "name": "leak_tracker_flutter_testing",
-      "version": "3.0.9",
+      "version": "3.0.10",
       "dependencies": [
         "flutter",
         "leak_tracker",
@@ -194,7 +108,7 @@
     },
     {
       "name": "vector_math",
-      "version": "2.1.4",
+      "version": "2.4.2",
       "dependencies": []
     },
     {
@@ -224,7 +138,7 @@
     },
     {
       "name": "matcher",
-      "version": "0.12.17",
+      "version": "0.12.20",
       "dependencies": [
         "async",
         "meta",
@@ -235,7 +149,7 @@
     },
     {
       "name": "test_api",
-      "version": "0.7.4",
+      "version": "0.7.12",
       "dependencies": [
         "async",
         "boolean_selector",
@@ -249,8 +163,13 @@
       ]
     },
     {
+      "name": "lints",
+      "version": "6.1.0",
+      "dependencies": []
+    },
+    {
       "name": "xml",
-      "version": "6.6.1",
+      "version": "7.0.1",
       "dependencies": [
         "collection",
         "meta",
@@ -267,16 +186,14 @@
     },
     {
       "name": "image",
-      "version": "4.5.4",
+      "version": "4.9.2",
       "dependencies": [
-        "archive",
-        "meta",
-        "xml"
+        "archive"
       ]
     },
     {
       "name": "crypto",
-      "version": "3.0.6",
+      "version": "3.0.7",
       "dependencies": [
         "typed_data"
       ]
@@ -296,9 +213,8 @@
     },
     {
       "name": "archive",
-      "version": "4.0.7",
+      "version": "4.0.9",
       "dependencies": [
-        "crypto",
         "path",
         "posix"
       ]
@@ -309,8 +225,94 @@
       "dependencies": []
     },
     {
+      "name": "material_color_utilities",
+      "version": "0.13.0",
+      "dependencies": [
+        "collection"
+      ]
+    },
+    {
+      "name": "characters",
+      "version": "1.4.1",
+      "dependencies": []
+    },
+    {
+      "name": "harfbuzz_ffi",
+      "version": "0.5.0",
+      "dependencies": [
+        "code_assets",
+        "ffi",
+        "hooks",
+        "logging",
+        "meta",
+        "native_toolchain_c"
+      ]
+    },
+    {
+      "name": "ffi",
+      "version": "2.2.0",
+      "dependencies": []
+    },
+    {
+      "name": "async",
+      "version": "2.13.1",
+      "dependencies": [
+        "collection",
+        "meta"
+      ]
+    },
+    {
+      "name": "leak_tracker_testing",
+      "version": "3.0.2",
+      "dependencies": [
+        "leak_tracker",
+        "matcher",
+        "meta"
+      ]
+    },
+    {
+      "name": "leak_tracker",
+      "version": "11.0.2",
+      "dependencies": [
+        "clock",
+        "collection",
+        "meta",
+        "path",
+        "vm_service"
+      ]
+    },
+    {
+      "name": "term_glyph",
+      "version": "1.2.2",
+      "dependencies": []
+    },
+    {
+      "name": "string_scanner",
+      "version": "1.4.1",
+      "dependencies": [
+        "source_span"
+      ]
+    },
+    {
+      "name": "source_span",
+      "version": "1.10.2",
+      "dependencies": [
+        "collection",
+        "path",
+        "term_glyph"
+      ]
+    },
+    {
+      "name": "boolean_selector",
+      "version": "2.1.2",
+      "dependencies": [
+        "source_span",
+        "string_scanner"
+      ]
+    },
+    {
       "name": "petitparser",
-      "version": "7.0.1",
+      "version": "7.0.2",
       "dependencies": [
         "collection",
         "meta"
@@ -332,7 +334,7 @@
     },
     {
       "name": "posix",
-      "version": "6.0.3",
+      "version": "6.5.2",
       "dependencies": [
         "ffi",
         "meta",
@@ -340,9 +342,90 @@
       ]
     },
     {
-      "name": "ffi",
-      "version": "2.1.4",
+      "name": "native_toolchain_c",
+      "version": "0.19.3",
+      "dependencies": [
+        "code_assets",
+        "glob",
+        "hooks",
+        "logging",
+        "meta",
+        "pub_semver"
+      ]
+    },
+    {
+      "name": "logging",
+      "version": "1.3.0",
       "dependencies": []
+    },
+    {
+      "name": "hooks",
+      "version": "2.2.0",
+      "dependencies": [
+        "collection",
+        "crypto",
+        "logging",
+        "pub_semver",
+        "record_use",
+        "yaml"
+      ]
+    },
+    {
+      "name": "code_assets",
+      "version": "1.2.1",
+      "dependencies": [
+        "collection",
+        "hooks"
+      ]
+    },
+    {
+      "name": "vm_service",
+      "version": "15.3.0",
+      "dependencies": []
+    },
+    {
+      "name": "pub_semver",
+      "version": "2.2.0",
+      "dependencies": [
+        "collection"
+      ]
+    },
+    {
+      "name": "glob",
+      "version": "2.1.3",
+      "dependencies": [
+        "async",
+        "collection",
+        "file",
+        "path",
+        "string_scanner"
+      ]
+    },
+    {
+      "name": "yaml",
+      "version": "3.1.3",
+      "dependencies": [
+        "collection",
+        "source_span",
+        "string_scanner"
+      ]
+    },
+    {
+      "name": "record_use",
+      "version": "1.1.1",
+      "dependencies": [
+        "collection",
+        "meta",
+        "pub_semver"
+      ]
+    },
+    {
+      "name": "file",
+      "version": "7.0.1",
+      "dependencies": [
+        "meta",
+        "path"
+      ]
     }
   ],
   "configVersion": 1
