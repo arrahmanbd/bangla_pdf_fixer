@@ -266,7 +266,7 @@ GitHub: [@ardevcraft](https://github.com/ardevcraft)
 
 Crafted with ❤️ for **Bangla** and the open-source community. 🇧🇩
 
-[![Stand With Palestine](https://github.com/ardevcraft/bangla_pdf_fixer/raw/master/images/StandWithPalestine.svg)](https://pub.dev/packages/bangla_pdf_fixer)
+[![Stand With Palestine](https://github.com/ardevcraft/bangla_pdf_fixer/raw/master/images/stand_with_plastine.svg)](https://pub.dev/packages/bangla_pdf_fixer)
 
 
 ## Repository
